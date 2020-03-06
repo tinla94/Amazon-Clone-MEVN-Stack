@@ -6,6 +6,12 @@ const mongoose = require('mongoose');
 
 // app
 const app = express();
+
+// require apis
+const productRoutes = require('./routes/product');
+const categoryRoutes = require('./routes/categories');
+const ownerRoutes = require('./routes/owner');
+
 // Connect to mongodb
 mongoose.connect(
     process.env.MONGO_URI,
@@ -24,6 +30,10 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// api routes
+app.use('/api', productRoutes);
+app.use('/api', categoryRoutes);
+app.use('/api', ownerRoutes);
 
 // Home page
 app.get("/", (req, res) => {
@@ -31,5 +41,5 @@ app.get("/", (req, res) => {
 });
 
 // PORT
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));

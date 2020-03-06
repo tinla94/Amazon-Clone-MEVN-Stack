@@ -1,4 +1,5 @@
-import { model, Schema } from 'mongoose';
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const OwnerSchema = new Schema({
     name: String,
@@ -7,4 +8,4 @@ const OwnerSchema = new Schema({
 });
 
 
-module.exports = model("Owner", OwnerSchema);
+module.exports = mongoose.model("Owner", OwnerSchema);
