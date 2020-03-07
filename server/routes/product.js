@@ -10,6 +10,10 @@ router.post('/products', upload.single("photo"),async (req, res) => {
         product.description = req.body.description;
         product.photo = req.file.location;
         product.stockQuantity = req.body.stockQuantity;
+        product.owner = req.body.ownerID;
+        product.category = req.body.categoryID;
+        product.price = req.body.price;
+
 
         // save product
         await product.save();
@@ -74,7 +78,8 @@ router.put('/products/:id', upload.single('photo'), async (req ,res) => {
                     category: categoryID,
                     photo: req.file.location,
                     description,
-                    owner: ownerID
+                    owner: ownerID,
+                    stockQuantity
                 },
             },
             { upsert: true }

@@ -1,14 +1,17 @@
 const router = require('express').Router();
 const Owner = require('../models/owner');
+const upload = require('../middlewares/upload-photo');
+
 
 // POST request - create onwer
-router.post('/owners', async (req, res) => {
+router.post('/owners', upload.single('ownerPhoto'), async (req, res) => {
     const {name, about} = req.body;
 
     try {
         let owner = new Owner();
         owner.name = name;
         owner.about = about;
+        owner.photo = req.file.location
 
         // save owner
         await owner.save();
