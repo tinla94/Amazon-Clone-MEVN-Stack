@@ -41,19 +41,20 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
+    '@nuxtjs/auth',
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv',
+    '@nuxtjs/pwa'
   ],
   /*
   ** Axios module configuration
   */
   axios: {
     proxy: true,
-    baseURL: 'http://localhost:5000/api'
+    baseURL: 'http://localhost:5000'
+  },
+  proxy: {
+    "/api": 'http://localhost:5000'
   },
   /*
   ** Build configuration
@@ -63,6 +64,18 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+    },
+  },
+  auth : {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            propertyName: "token",
+          },
+          logout: true
+        }
+      }
     }
   }
 }

@@ -116,8 +116,8 @@
     },
     async asyncData({ $axios }) {
       try {
-        let response = await $axios.$get('/products');
-        console.log(response);
+        let response = await $axios.$get('/api/products');
+
         return {
           products: response.products
         }

@@ -20,7 +20,7 @@ module.exports = function(req, res, next) {
                 });
             } else {
                 // decoded = user
-                req.user = decoded;
+                req.decoded = decoded;
                 next(); // move on
             };
         });

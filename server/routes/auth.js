@@ -83,10 +83,38 @@ router.post('/auth/login', async (req, res) => {
 });
 
 
+/* Update User Profile */
+router.put('/auth/user', requireLogin, async (req, res) => {
+    const { name, email, password } = req.body;
+
+    try {
+        const foundUser = await User.findOneAndUpdate({ _id: req.decoded._id });
+
+        if(foundUser) {
+            if(name) foundUser.name = name;
+            if(email) foundUser.email = email;
+            if(password) foundUser.password = password;
+
+            await foundUser.save();
+
+            res.json({
+                success: true,
+                message: "Successfully updated"
+            })
+        }
+    } catch(err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+    }
+})
+
+
 /* User Profile  */
 router.get("/auth/user", requireLogin, async (req, res) => {
     try {
-        let foundUser = await User.findOne({ _id: req.user._id });
+        let foundUser = await User.findOne({ _id: req.decoded._id });
         if(foundUser) {
             res.json({
                 success: true,
