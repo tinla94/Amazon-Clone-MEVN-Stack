@@ -99,7 +99,20 @@
                                         ></i>
                                     </a> (Author)
                                 </div>
-                                <div class="reviewGroup"></div>
+                                <div class="reviewGroup">
+                                    <no-ssr>
+                                        <star-rating
+                                            :rating="product.averageRating" 
+                                            :show-rating="false" 
+                                            :glow="1" 
+                                            :border="1"
+                                            :rounded-corners="true"
+                                            :read-only="true"
+                                            :star-size="18"
+                                            :star-point="[23,1,14,17,0,19,10,34,7,50,23,43,38,50,36,34,46,19,31,17]"
+                                        ></star-rating>
+                                    </no-ssr>
+                                </div>
                                 <hr  style="margin-top: 10px" />
                                 <!-- A tags dummy data -->
                                 <div class="mediaMatrix">
@@ -363,6 +376,8 @@
                             </div>
                         </div>
                     </div>
+                    <ReviewSection 
+                        :product="product" :reviews="reviews" />
                 </div>
             </div>
         </div>    
@@ -371,12 +386,26 @@
 
 
 <script>
+    import ReviewSection from '~/components/ReviewSection';
+
     export default {
+        components: {
+            ReviewSection,
+            'star-rating': () => import('vue-star-rating')
+        },
         async asyncData({ $axios, params }) {
             try {
-                let response = await $axios.$get(`/products/${params.id}`);
+                let singleProduct = $axios.$get(`/api/products/${params.id}`);
+                let manyReviews = $axios.$get(`/api/reviews/${params.id}`);
+
+                const [productResponse, reviewResponse] = await Promise.all([
+                    singleProduct,
+                    manyReviews
+                ]);
+
                 return {
-                    product: response.product
+                    product: productResponse.product,
+                    reviews: reviewResponse.reviews
                 }
             } catch(err) {
                 console.log(err);

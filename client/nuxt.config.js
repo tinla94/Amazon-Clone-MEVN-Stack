@@ -70,11 +70,13 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: {
-            propertyName: "token",
-          },
-          logout: true
-        }
+          auth: {
+            login: {
+              propertyName: "token",
+            },
+            logout: true
+            }
+          }
       }
     }
   }
