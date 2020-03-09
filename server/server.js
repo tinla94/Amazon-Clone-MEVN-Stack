@@ -12,6 +12,7 @@ const app = express();
 const productRoutes = require('./routes/product');
 const categoryRoutes = require('./routes/categories');
 const ownerRoutes = require('./routes/owner');
+const authRoutes = require('./routes/auth');
 
 // Connect to mongodb
 mongoose.connect(
@@ -36,6 +37,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api', productRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', ownerRoutes);
+app.use('/api', authRoutes);
 
 // Home page
 app.get("/", (req, res) => {
