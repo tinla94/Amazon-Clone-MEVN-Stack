@@ -114,7 +114,8 @@ router.put('/auth/user', requireLogin, async (req, res) => {
 /* User Profile  */
 router.get("/auth/user", requireLogin, async (req, res) => {
     try {
-        let foundUser = await User.findOne({ _id: req.decoded._id });
+        let foundUser = await User.findOne({ _id: req.decoded._id }).populate('address').exec();
+
         if(foundUser) {
             res.json({
                 success: true,
