@@ -278,7 +278,10 @@
                                         <div class="a-section a-spacing-mini">Ships from and sold by Amazon.com</div>
                                     </div>
                                     <div class="a-section">
-                                        <div class="a-button-stack">
+                                        <div 
+                                            class="a-button-stack"
+                                            @click="addProductToCart(product)"
+                                            >
                                             <span class="a-spacing-small a-button-primary a-button-icon">
                                                 <span class="a-button-inner">
                                                     <i class="a-icon a-icon-cart"></i>
@@ -387,7 +390,7 @@
 
 <script>
     import ReviewSection from '~/components/ReviewSection';
-
+    import { mapActions } from 'vuex';
     export default {
         components: {
             ReviewSection,
@@ -410,6 +413,9 @@
             } catch(err) {
                 console.log(err);
             }
+        },
+        methods: {
+            ...mapActions(["addProductToCart"])
         }
     }
 </script>
