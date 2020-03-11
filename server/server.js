@@ -17,6 +17,7 @@ const reviewRoutes = require('./routes/review');
 const addressRoutes = require('./routes/address');
 const paymentRoutes = require('./routes/payment');
 const orderRoutes = require('./routes/order');
+const searchRoutes = require('./routes/search');
 
 
 // Connect to mongodb
@@ -47,6 +48,7 @@ app.use('/api', reviewRoutes);
 app.use('/api', addressRoutes);
 app.use('/api', paymentRoutes);
 app.use('/api', orderRoutes);
+app.use('/api', searchRoutes);
 
 
 
