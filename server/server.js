@@ -15,6 +15,8 @@ const ownerRoutes = require('./routes/owner');
 const authRoutes = require('./routes/auth');
 const reviewRoutes = require('./routes/review');
 const addressRoutes = require('./routes/address');
+const paymentRoutes = require('./routes/payment');
+const orderRoutes = require('./routes/order');
 
 
 // Connect to mongodb
@@ -43,6 +45,9 @@ app.use('/api', ownerRoutes);
 app.use('/api', authRoutes);
 app.use('/api', reviewRoutes);
 app.use('/api', addressRoutes);
+app.use('/api', paymentRoutes);
+app.use('/api', orderRoutes);
+
 
 
 // Home page
