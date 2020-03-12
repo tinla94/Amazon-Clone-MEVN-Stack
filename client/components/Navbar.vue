@@ -29,7 +29,9 @@
                                 </div>
                                 <div id="glow-ingress-block">
                                     <span class="nav-line-1" id="glow-ingress-line1">Deliver to</span>
-                                    <span class="nav-line-2" id="glow-ingress-line2">{{ $auth.$state.user.address.city }}, {{ $auth.$state.user.address.state }}</span>
+                                    <span class="nav-line-2" id="glow-ingress-line2">
+                                        {{ $auth.$state.user ? $auth.$state.user.address.city : 'Seatle'}}, 
+                                        {{ $auth.$state.user ? $auth.$state.user.address.state : 'WA' }}</span>
                                 </div>
                             </nuxt-link>
                         </div>
@@ -40,8 +42,8 @@
                             <div class="nav-shop">
                                 <nuxt-link to="/history" class="nav-a nav-a-2 nav-single-row-link">
                                     <span class="nav-line-2">
-                                                    Browsing History
-                                                    <span class="nav-icon nav-arrow" style="visibility: visible"></span>
+                                        Browsing History
+                                        <span class="nav-icon nav-arrow" style="visibility: visible"></span>
                                     </span>
                                 </nuxt-link>
                             </div>
